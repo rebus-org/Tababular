@@ -35,6 +35,13 @@ namespace Tababular
             return UseExtractor(extractor);
         }
 
+        public string FormatJson(string jsonText)
+        {
+            var extractor = new JsonTableExtractor(jsonText);
+
+            return UseExtractor(extractor);
+        }
+
         static string UseExtractor(ITableExtractor extractor)
         {
             var table = extractor.GetTable();
