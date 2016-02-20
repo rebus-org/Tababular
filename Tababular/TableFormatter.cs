@@ -35,6 +35,9 @@ namespace Tababular
             return UseExtractor(extractor);
         }
 
+        /// <summary>
+        /// Formats the given JSON object or array of objects as a table
+        /// </summary>
         public string FormatJson(string jsonText)
         {
             var extractor = new JsonTableExtractor(jsonText);
