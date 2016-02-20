@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
 using NUnit.Framework;
 using Tababular.Tests.Ex;
 
-namespace Tababular.Tests
+namespace Tababular.Tests.Integration
 {
     [TestFixture]
     public class SimpleTest

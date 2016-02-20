@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extractors\TestJsonTableExtractor.cs" />
     <Compile Include="Ex\StringExtensions.cs" />
-    <Compile Include="JsonTest.cs" />
-    <Compile Include="SimpleTest.cs" />
+    <Compile Include="Formatter\TestTableFormatter.cs" />
+    <Compile Include="Integration\JsonTest.cs" />
+    <Compile Include="Integration\SimpleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +60,7 @@
       <Name>Tababular</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

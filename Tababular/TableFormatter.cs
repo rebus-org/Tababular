@@ -52,22 +52,27 @@ namespace Tababular
             return FormatTable(table);
         }
 
-        static string FormatTable(Table table)
+        internal static string FormatTable(Table table)
         {
             const char horizontalLineChar = '=';
             const char verticalLineChar = '|';
 
             var builder = new StringBuilder();
 
+            if (!table.Columns.Any()) return "";
+
             BuildHorizontalLine(table, builder, horizontalLineChar);
 
             BuildColumnLabels(table, builder, verticalLineChar);
 
-            foreach (var row in table.Rows)
+            if (table.Rows.Any())
             {
-                BuildHorizontalLine(table, builder, horizontalLineChar);
+                foreach (var row in table.Rows)
+                {
+                    BuildHorizontalLine(table, builder, horizontalLineChar);
 
-                BuildTableRow(row, table, builder, verticalLineChar);
+                    BuildTableRow(row, table, builder, verticalLineChar);
+                }
             }
 
             BuildHorizontalLine(table, builder, horizontalLineChar);
