@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extractors\TestDictionaryTableExtractor.cs" />
     <Compile Include="Extractors\TestJsonTableExtractor.cs" />
+    <Compile Include="Extractors\TestObjectTableExtractor.cs" />
     <Compile Include="Ex\StringExtensions.cs" />
     <Compile Include="Formatter\TestTableFormatter.cs" />
     <Compile Include="Integration\JsonTest.cs" />

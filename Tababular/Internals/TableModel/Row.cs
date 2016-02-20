@@ -40,5 +40,10 @@ namespace Tababular.Internals.TableModel
         }
 
         public int Height { get; private set; }
+
+        public IEnumerable<Cell> GetAllCells()
+        {
+            return _cells.Values;
+        }
     }
 }

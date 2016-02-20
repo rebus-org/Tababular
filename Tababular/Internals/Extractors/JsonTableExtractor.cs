@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Tababular.Internals.Extensions;
@@ -48,9 +49,14 @@ namespace Tababular.Internals.Extractors
                 {
                     var name = property.Name;
                     var column = columns.GetOrAdd(name, _ => new Column(name));
-                    var value = property.Value.ToString();
 
-                    row.AddCell(column, new Cell(value));
+                    var value = property.Value;
+
+                    var stringValue = value.Type == JTokenType.Array 
+                        ? GetAsLines(value) 
+                        : value.ToString();
+
+                    row.AddCell(column, new Cell(stringValue));
                 }
 
                 rows.Add(row);
@@ -58,6 +64,13 @@ namespace Tababular.Internals.Extractors
 
             return new Table(columns.Values.ToList(), rows);
 
+        }
+
+        static string GetAsLines(JToken value)
+        {
+            var lines = value.Values<string>();
+
+            return string.Join(Environment.NewLine, lines);
         }
     }
 }
