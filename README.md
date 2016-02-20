@@ -59,6 +59,14 @@ becomes nice like this:
 
 which looks pretty neat if you ask me.
 
+# Formatting different things
+
+Tababular can format different things, which at the moment includes:
+
+* Objects: `formatter.FormatObjects(objects)`
+* Dictionaries: `formatter.FormatDictionaries(dictionaries)`
+* JSON: `formatter.FormatJson(jsonText)`
+
 # License
 
 [The MIT License (MIT)](http://opensource.org/licenses/MIT)
