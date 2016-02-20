@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tababular", "Tababular\Tababular.csproj", "{94EDA166-33F2-4D88-B5B4-268429254205}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tababular.Tests", "Tababular.Tests\Tababular.Tests.csproj", "{512230FE-18E5-4C59-9AE8-6432B0A6143A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stuff", "stuff", "{D6C5120D-809A-41A0-9B0C-4149C88C56E1}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{BB6EFF8C-E12C-4B6A-AB53-6BFEE4A5CC86}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\build.cmd = scripts\build.cmd
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94EDA166-33F2-4D88-B5B4-268429254205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94EDA166-33F2-4D88-B5B4-268429254205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94EDA166-33F2-4D88-B5B4-268429254205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94EDA166-33F2-4D88-B5B4-268429254205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512230FE-18E5-4C59-9AE8-6432B0A6143A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512230FE-18E5-4C59-9AE8-6432B0A6143A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512230FE-18E5-4C59-9AE8-6432B0A6143A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512230FE-18E5-4C59-9AE8-6432B0A6143A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
