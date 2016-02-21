@@ -82,4 +82,6 @@ echo Pushing to NuGet.org...
 
 %nuget% push %deploydir%\*.nupkg
 
+git push --tags
+
 :exit
