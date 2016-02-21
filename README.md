@@ -92,7 +92,7 @@ In this case, the resulting table would look like this:
 	| ctxtest02   | 10.0.0.11 | 5432  | This bad boy hosts our database and a couple of internal jobs. |
 	====================================================================================================
 
-which might be fine, but since the texts can be event longer than this, it might end up being a problem.
+which might be fine, but since the texts can be even longer than this, it might end up being a problem.
 
 Fear not! We can supply a small hint to the table formatter like this:
 
