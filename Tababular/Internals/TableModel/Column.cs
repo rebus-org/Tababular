@@ -26,11 +26,16 @@
 
         void AdjustForWidth(int cellWidth)
         {
-            var width = cellWidth + (2 * Padding);
+            var width = cellWidth + 2 * Padding;
 
             if (width < Width) return;
 
             Width = width;
+        }
+
+        public void ConstrainWidth(int newWidth)
+        {
+            Width = newWidth;
         }
     }
 }

@@ -15,6 +15,16 @@ namespace Tababular
     /// </summary>
     public class TableFormatter
     {
+        readonly Hints _hints;
+
+        /// <summary>
+        /// Creates the table formatter possibly using the given <see cref="Hints"/> to do its thing
+        /// </summary>
+        public TableFormatter(Hints hints = null)
+        {
+            _hints = hints ?? new Hints();
+        }
+
         /// <summary>
         /// Formats a sequence of objects as rows of a table, using the property names as column names
         /// </summary>
@@ -45,15 +55,22 @@ namespace Tababular
             return UseExtractor(extractor);
         }
 
-        static string UseExtractor(ITableExtractor extractor)
+        string UseExtractor(ITableExtractor extractor)
         {
             var table = extractor.GetTable();
 
-            return FormatTable(table);
+            return FormatTable(table, _hints);
         }
 
-        internal static string FormatTable(Table table)
+        internal static string FormatTable(Table table, Hints hints = null)
         {
+            hints = hints ?? new Hints();
+
+            if (hints.MaxTableWidth.HasValue)
+            {
+                EnforceMaxWidth(table, hints.MaxTableWidth.Value);
+            }
+
             const char horizontalLineChar = '=';
             const char verticalLineChar = '|';
 
@@ -78,6 +95,35 @@ namespace Tababular
             BuildHorizontalLine(table, builder, horizontalLineChar);
 
             return builder.ToString();
+        }
+
+        static void EnforceMaxWidth(Table table, int maxWidth)
+        {
+            if (!table.Columns.Any()) return;
+
+            while (true)
+            {
+                var totalWidth = table.Columns.Sum(c => c.Width);
+
+                if (totalWidth < maxWidth) break;
+
+                var widestColumn = table.Columns
+                    .OrderByDescending(c => c.Width)
+                    .First();
+
+                widestColumn.ConstrainWidth(widestColumn.Width/2);
+            }
+
+            foreach (var column in table.Columns)
+            {
+                foreach (var row in table.Rows)
+                {
+                    var cell = row.GetCellOrNull(column);
+                    if (cell == null) continue;
+
+                    cell.Rearrange(column);
+                }
+            }
         }
 
         static void BuildColumnLabels(Table table, StringBuilder builder, char verticalLineChar)
@@ -118,7 +164,7 @@ namespace Tababular
                     var text = index < lines.Length ? lines[index] : "";
 
                     builder.Append(new string(' ', colum.Padding));
-                    builder.Append(text.PadRight(colum.Width));
+                    builder.Append(text.PadRight(colum.Width - colum.Padding));
                     builder.Append(verticalLineChar);
                 }
 
@@ -130,7 +176,7 @@ namespace Tababular
         {
             foreach (var column in table.Columns)
             {
-                builder.Append(new string(c, column.Width + 2 * column.Padding));
+                builder.Append(new string(c, column.Width + column.Padding));
             }
 
             builder.Append(c);

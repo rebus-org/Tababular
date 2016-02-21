@@ -10,6 +10,31 @@ namespace Tababular.Tests.Formatter
     public class TestTableFormatter
     {
         [Test]
+        public void CanTakeAHint()
+        {
+            var column = new Column("Just a colum");
+            var row = new Row();
+            row.AddCell(column, new Cell(new string('*', 80)));
+            var table = new Table(new List<Column> {column}, new List<Row> {row});
+            var text = TableFormatter.FormatTable(table, new Hints { MaxTableWidth = 50 });
+
+            Console.WriteLine(text);
+
+            Assert.That(text.Normalized(), Is.EqualTo(@"
+
+===========================================
+| Just a colum                            |
+===========================================
+| *************************************** |
+| *************************************** |
+| **                                      |
+===========================================
+
+".Normalized()));
+
+        }
+
+        [Test]
         public void NoColumnsAndNoRows_EmptyResult()
         {
             var text = TableFormatter.FormatTable(new Table(new List<Column>(), new List<Row>()));
@@ -32,9 +57,9 @@ namespace Tababular.Tests.Formatter
             Console.WriteLine(text);
 
             Assert.That(text.Normalized(), Is.EqualTo(@"
-=================
-| Bimse  | Hej  |
-=================
+===============
+| Bimse | Hej |
+===============
 ".Normalized()));
 
         }

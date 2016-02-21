@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hints.cs" />
+    <Compile Include="Internals\Breaker.cs" />
+    <Compile Include="Internals\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Internals\Extractors\DictionaryTableExtractor.cs" />
     <Compile Include="Internals\Extractors\JsonTableExtractor.cs" />
     <Compile Include="Internals\ITableExtractor.cs" />

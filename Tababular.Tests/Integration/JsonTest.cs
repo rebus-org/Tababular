@@ -19,13 +19,13 @@ namespace Tababular.Tests.Integration
             Console.WriteLine(text);
 
             Assert.That(text.Normalized(), Is.EqualTo(@"
-======================================
-| A property     | Another property  |
-======================================
-| A value        | 123               |
-======================================
-| Another value  | 2567              |
-======================================
+====================================
+| A property    | Another property |
+====================================
+| A value       | 123              |
+====================================
+| Another value | 2567             |
+====================================
 ".Normalized()));
 
         }
@@ -38,11 +38,11 @@ namespace Tababular.Tests.Integration
             Console.WriteLine(text);
 
             Assert.That(text.Normalized(), Is.EqualTo(@"
-===================================
-| A property  | Another property  |
-===================================
-| A value     | 123               |
-===================================
+=================================
+| A property | Another property |
+=================================
+| A value    | 123              |
+=================================
 ".Normalized()));
         }
     }

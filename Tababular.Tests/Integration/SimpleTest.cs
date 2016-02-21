@@ -24,17 +24,17 @@ namespace Tababular.Tests.Integration
             Console.WriteLine(text);
 
             const string expected = @"
-================================
-| FirstColumn  | SecondColumn  |
-================================
-| r1           | hej           |
-================================
-| r2           | hej           |
-================================
-| r3           | hej           |
-================================
-| r4           | hej           |
-================================
+==============================
+| FirstColumn | SecondColumn |
+==============================
+| r1          | hej          |
+==============================
+| r2          | hej          |
+==============================
+| r3          | hej          |
+==============================
+| r4          | hej          |
+==============================
 ";
             Assert.That(text.Normalized(), Is.EqualTo(expected.Normalized()));
         }
@@ -56,14 +56,66 @@ namespace Tababular.Tests.Integration
 
             const string expected = @"
 
-===============================================
-| FirstColumn  | SecondColumn  | ThirdColumn  |
-===============================================
-| r1           | hej           | hej igen     |
-===============================================
-| r2           | hej           | hej igen     |
-===============================================
+============================================
+| FirstColumn | SecondColumn | ThirdColumn |
+============================================
+| r1          | hej          | hej igen    |
+============================================
+| r2          | hej          | hej igen    |
+============================================
 
+";
+
+            Assert.That(text.Normalized(), Is.EqualTo(expected.Normalized()));
+        }
+
+        [Test]
+        public void SimplePaddingTest_OneColumn()
+        {
+            var tableFormatter = new TableFormatter();
+
+            var objects = new[]
+            {
+                new {A = "A"}
+            };
+
+            var text = tableFormatter.FormatObjects(objects);
+
+            Console.WriteLine(text);
+
+            const string expected = @"
+
+=====
+| A |
+=====
+| A |
+=====
+";
+
+            Assert.That(text.Normalized(), Is.EqualTo(expected.Normalized()));
+        }
+
+        [Test]
+        public void SimplePaddingTest_TwoColumns()
+        {
+            var tableFormatter = new TableFormatter();
+
+            var objects = new[]
+            {
+                new {A = "A", B = "B"}
+            };
+
+            var text = tableFormatter.FormatObjects(objects);
+
+            Console.WriteLine(text);
+
+            const string expected = @"
+
+=========
+| A | B |
+=========
+| A | B |
+=========
 ";
 
             Assert.That(text.Normalized(), Is.EqualTo(expected.Normalized()));
@@ -82,11 +134,11 @@ namespace Tababular.Tests.Integration
             Console.WriteLine(text);
 
             const string expected = @"
-===============================
-| FirstColumn                 |
-===============================
-| This is a fairly long text  |
-===============================
+==============================
+| FirstColumn                |
+==============================
+| This is a fairly long text |
+==============================
 ";
             Assert.That(text.Normalized(), Is.EqualTo(expected.Normalized()));
         }
@@ -109,17 +161,17 @@ namespace Tababular.Tests.Integration
             const string expected = @"
 
 
-==========================================================================================
-| Headline with space  | Another headline with space  | Yet another headline with space  |
-==========================================================================================
-| Some value           |                              |                                  |
-==========================================================================================
-| Another value        |                              |                                  |
-==========================================================================================
-|                      | Third value                  |                                  |
-==========================================================================================
-|                      |                              | Fourth value                     |
-==========================================================================================
+=======================================================================================
+| Headline with space | Another headline with space | Yet another headline with space |
+=======================================================================================
+| Some value          |                             |                                 |
+=======================================================================================
+| Another value       |                             |                                 |
+=======================================================================================
+|                     | Third value                 |                                 |
+=======================================================================================
+|                     |                             | Fourth value                    |
+=======================================================================================
 
 ";
 
@@ -142,13 +194,13 @@ And this is the third and last line"}
 
             const string expected = @"
 
-========================================
-| FirstColumn                          |
-========================================
-| This is the first line               |
-| This is the second line              |
-| And this is the third and last line  |
-========================================
+=======================================
+| FirstColumn                         |
+=======================================
+| This is the first line              |
+| This is the second line             |
+| And this is the third and last line |
+=======================================
 ";
 
             Assert.That(text.Normalized(), Is.EqualTo(expected.Normalized()));
