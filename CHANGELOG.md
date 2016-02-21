@@ -11,3 +11,7 @@
 ## 1.0.2
 
 * Added ability to supply hints - at the moment this is the ability to specify a max width for the table
+
+## 1.0.3
+
+* Changed total table width constraint algorithm to cut off one fourth of the widest column's width on each iteration

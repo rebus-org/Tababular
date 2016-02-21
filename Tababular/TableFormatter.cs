@@ -111,7 +111,7 @@ namespace Tababular
                     .OrderByDescending(c => c.Width)
                     .First();
 
-                widestColumn.ConstrainWidth(widestColumn.Width/2);
+                widestColumn.ConstrainWidth(3*widestColumn.Width/4);
             }
 
             foreach (var column in table.Columns)
