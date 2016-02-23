@@ -51,6 +51,7 @@
     <Compile Include="Ex\StringExtensions.cs" />
     <Compile Include="Formatter\TestBreaker.cs" />
     <Compile Include="Formatter\TestTableFormatter.cs" />
+    <Compile Include="Integration\CollapseTest.cs" />
     <Compile Include="Integration\JsonTest.cs" />
     <Compile Include="Integration\SimpleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

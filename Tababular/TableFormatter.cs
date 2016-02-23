@@ -66,6 +66,8 @@ namespace Tababular
         {
             hints = hints ?? new Hints();
 
+            if (!table.Columns.Any()) return "";
+
             if (hints.MaxTableWidth.HasValue)
             {
                 EnforceMaxWidth(table, hints.MaxTableWidth.Value);
@@ -74,19 +76,28 @@ namespace Tababular
             const char horizontalLineChar = '=';
             const char verticalLineChar = '|';
 
-            var builder = new StringBuilder();
+            var skipHorizontalLines = hints.CollapseVerticallyWhenSingleLine
+                                      && !table.HasCellWith(c => c.Lines.Length > 1);
 
-            if (!table.Columns.Any()) return "";
+            var builder = new StringBuilder();
 
             BuildHorizontalLine(table, builder, horizontalLineChar);
 
             BuildColumnLabels(table, builder, verticalLineChar);
 
+            if (skipHorizontalLines)
+            {
+                BuildHorizontalLine(table, builder, horizontalLineChar);
+            }
+
             if (table.Rows.Any())
             {
                 foreach (var row in table.Rows)
                 {
-                    BuildHorizontalLine(table, builder, horizontalLineChar);
+                    if (!skipHorizontalLines)
+                    {
+                        BuildHorizontalLine(table, builder, horizontalLineChar);
+                    }
 
                     BuildTableRow(row, table, builder, verticalLineChar);
                 }
@@ -111,7 +122,7 @@ namespace Tababular
                     .OrderByDescending(c => c.Width)
                     .First();
 
-                widestColumn.ConstrainWidth(3*widestColumn.Width/4);
+                widestColumn.ConstrainWidth(3 * widestColumn.Width / 4);
             }
 
             foreach (var column in table.Columns)

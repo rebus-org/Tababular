@@ -19,3 +19,7 @@
 ## 1.0.4
 
 * Added ability to parse [JSONL](http://jsonlines.org/) too
+
+## 1.0.5
+
+* Added ability (via a hint) to specify that the formatter can collapse the table vertically if it has no cell with multiple lines
