@@ -18,6 +18,65 @@ namespace Tababular.Internals.Extractors
 
         public Table GetTable()
         {
+            var table = ParseArrayOrNull()
+                        ?? ParseJsonlOrNull()
+                        ?? ParseObjectOrNull();
+
+            if (table == null)
+            {
+                throw new FormatException($"Could not interpret this as JSON: '{_jsonText}'");
+            }
+
+            return table;
+        }
+
+        Table ParseJsonlOrNull()
+        {
+            try
+            {
+                var lines = _jsonText
+                    .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(line => line.Trim())
+                    .ToList();
+
+                var looksLikeJsonLines = lines
+                    .All(line => line.StartsWith("{") && line.EndsWith("}"));
+
+                if (!looksLikeJsonLines)
+                {
+                    return null;
+                }
+
+                var jsonObjects = lines.Select(JObject.Parse);
+
+                var jsonArray = new JArray(jsonObjects);
+
+                return GetTableFromJsonArray(jsonArray);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        Table ParseObjectOrNull()
+        {
+            try
+            {
+                var singleObject = JObject.Parse(_jsonText);
+
+                var jsonArray = new JArray(singleObject);
+
+                return GetTableFromJsonArray(jsonArray);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        Table ParseArrayOrNull()
+        {
             try
             {
                 var jsonArray = JArray.Parse(_jsonText);
@@ -26,11 +85,7 @@ namespace Tababular.Internals.Extractors
             }
             catch
             {
-                var singleObject = JObject.Parse(_jsonText);
-
-                var jsonArray = new JArray(singleObject);
-
-                return GetTableFromJsonArray(jsonArray);
+                return null;
             }
         }
 

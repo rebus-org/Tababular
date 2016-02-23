@@ -8,6 +8,18 @@ namespace Tababular.Tests.Extractors
     public class TestJsonTableExtractor
     {
         [Test]
+        public void CanExtractFromJsonlToo()
+        {
+            var jsonObjects = @"{""First column"": ""Value 1"", ""Second column"": ""Value 1""}
+{""First column"": ""Value 1"", ""Second column"": ""Value 1""}";
+
+            var table = new JsonTableExtractor(jsonObjects).GetTable();
+
+            Assert.That(table.Rows.Count, Is.EqualTo(2));
+            Assert.That(table.Columns.Count, Is.EqualTo(2));
+        }
+
+        [Test]
         public void DoesNotDieOnEmptyObject()
         {
             var table = new JsonTableExtractor("{}").GetTable();

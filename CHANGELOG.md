@@ -15,3 +15,7 @@
 ## 1.0.3
 
 * Changed total table width constraint algorithm to cut off one fourth of the widest column's width on each iteration
+
+## 1.0.4
+
+* Added ability to parse [JSONL](http://jsonlines.org/) too
