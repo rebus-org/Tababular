@@ -35,7 +35,7 @@ namespace Tababular.Internals.Extractors
             try
             {
                 var lines = _jsonText
-                    .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+                    .Split(new[] {Environment.NewLine, "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries)
                     .Select(line => line.Trim())
                     .ToList();
 
