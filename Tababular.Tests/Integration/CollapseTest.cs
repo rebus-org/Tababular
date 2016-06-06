@@ -48,6 +48,7 @@ namespace Tababular.Tests.Integration
 ruined the party!"},
             };
 
+
             var formatter = new TableFormatter(new Hints { CollapseVerticallyWhenSingleLine = true });
 
             var text = formatter.FormatObjects(objects);
