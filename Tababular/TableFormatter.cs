@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,8 +29,8 @@ namespace Tababular
         /// <summary>
         /// Formats a sequence of objects as rows of a table, using the property names as column names
         /// </summary>
-        public string FormatObjects(IEnumerable rows)
-        {
+        public string FormatObjects(params object[] rows)
+        {            
             var extractor = new ObjectTableExtractor(rows);
 
             return UseExtractor(extractor);

@@ -78,5 +78,27 @@ namespace Tababular.Tests.Formatter
             Assert.That(text.Normalized(), Is.EqualTo("".Normalized()));
 
         }
+
+
+        [Test]
+        public void SerializeOnlyOneObject()
+        {
+            var dynamicObject = new
+            {
+                Name = "Bimse"
+            };
+
+            var formattter = new TableFormatter();
+            var text = formattter.FormatObjects(dynamicObject);
+            Console.WriteLine(text);
+
+            Assert.That(text.Normalized(), Is.EqualTo(@"
+=========
+| Name  |
+=========
+| Bimse |
+=========".Normalized()));
+
+        }
     }
 }

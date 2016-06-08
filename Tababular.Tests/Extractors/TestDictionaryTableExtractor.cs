@@ -95,5 +95,6 @@ namespace Tababular.Tests.Extractors
             Assert.That(cellLines, Is.EqualTo(new[] {"line1", "line2", "line3"}));
 
         }
+ 
     }
 }
