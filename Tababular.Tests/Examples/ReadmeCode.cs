@@ -6,6 +6,7 @@ namespace Tababular.Tests.Examples
     [TestFixture]
     public class ReadmeCode
     {
+
         [Test]
         public void Example1()
         {
@@ -67,6 +68,16 @@ namespace Tababular.Tests.Examples
 ====================================================================================
             
             */
+        }
+
+        [Test]
+        public void Example4()
+        {
+            var tableFormatter = new TableFormatter();
+            
+            var text = tableFormatter.FormatObjects(new { FirstColumn = "r1", SecondColumn = "hej", ThirdColumn = "hej igen" });
+
+            Console.WriteLine(text);
         }
     }
 }

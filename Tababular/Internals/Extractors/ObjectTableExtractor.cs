@@ -11,7 +11,7 @@ namespace Tababular.Internals.Extractors
         readonly List<object> _objectRows;
 
         public ObjectTableExtractor(IEnumerable objectRows)
-        {
+        {            
             _objectRows = objectRows.Cast<object>().ToList();
         }
 
