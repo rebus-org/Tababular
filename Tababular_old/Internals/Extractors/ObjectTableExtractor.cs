@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Tababular.Internals.Extensions;
 using Tababular.Internals.TableModel;
 
@@ -25,7 +24,7 @@ namespace Tababular.Internals.Extractors
             {
                 var row = new Row();
 
-                foreach (var property in objectRow.GetType().GetTypeInfo().GetProperties())
+                foreach (var property in objectRow.GetType().GetProperties())
                 {
                     var name = property.Name;
                     var column = columns.GetOrAdd(name, _ => new Column(name));

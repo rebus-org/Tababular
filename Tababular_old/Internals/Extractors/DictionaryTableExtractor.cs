@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Tababular.Internals.Extensions;
 using Tababular.Internals.TableModel;
 
 namespace Tababular.Internals.Extractors
 {
-    class ObjectTableExtractor : ITableExtractor
+    class DictionaryTableExtractor : ITableExtractor
     {
-        readonly List<object> _objectRows;
+        readonly List<IDictionary<string, object>> _rows;
 
-        public ObjectTableExtractor(IEnumerable objectRows)
+        public DictionaryTableExtractor(IEnumerable<IDictionary<string, object>> rows)
         {
-            _objectRows = objectRows.Cast<object>().ToList();
+            _rows = rows.ToList();
         }
 
         public Table GetTable()
@@ -21,15 +19,14 @@ namespace Tababular.Internals.Extractors
             var columns = new Dictionary<string, Column>();
             var rows = new List<Row>();
 
-            foreach (var objectRow in _objectRows)
+            foreach (var dictRow in _rows)
             {
                 var row = new Row();
 
-                foreach (var property in objectRow.GetType().GetTypeInfo().GetProperties())
+                foreach (var name in dictRow.Keys)
                 {
-                    var name = property.Name;
                     var column = columns.GetOrAdd(name, _ => new Column(name));
-                    var value = property.GetValue(objectRow, null);
+                    var value = dictRow[name];
 
                     row.AddCell(column, new Cell(value));
                 }
@@ -38,7 +35,7 @@ namespace Tababular.Internals.Extractors
             }
 
             return new Table(columns.Values.ToList(), rows);
-        }
 
+        }
     }
 }
