@@ -42,6 +42,13 @@
     <DefineConstants>NETSTANDARD1_6</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="newtonsoft.json" Version="10.0.2" />
   </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="$(ProjectDir)..\scripts\patch_assemblyinfo.cmd $(ProjectDir)" />
+  </Target>
 </Project>
