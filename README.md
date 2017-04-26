@@ -1,6 +1,6 @@
 # Tababular
 
-A simple .NET monospace text table formatting library.
+A simple .NET monospace text table formatting library for .NET 4.5 and .NET Standard 1.6.
 
 You can use it if you are standing with a bunch of objects or dictionaries in your hand, and you
 wish for them to become as nice as this:
