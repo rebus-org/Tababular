@@ -27,3 +27,8 @@
 ## 1.0.6
 
 * Updated JSON.NET (which gets merged) to 8.0.3
+
+## 2.0.0-b01
+
+* Add .NET Core support
+* No longer merge JSON.NET
