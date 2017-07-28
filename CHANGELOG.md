@@ -28,7 +28,10 @@
 
 * Updated JSON.NET (which gets merged) to 8.0.3
 
-## 2.0.0-b01
+## 2.0.0
 
 * Add .NET Core support
 * No longer merge JSON.NET
+* Skip property enumeration for primitive-like types - thanks [gary-palmer]
+
+[gary-palmer]: https://github.com/gary-palmer
