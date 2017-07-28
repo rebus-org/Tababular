@@ -93,5 +93,18 @@ namespace Tababular.Tests.Extractors
 
         }
 
+
+        [Test]
+        public void CanExtractListOfPrimitiveObjects()
+        {
+            var objects = new List<string> { "line1", "line2", "line3" };
+            
+            var table = new ObjectTableExtractor(objects).GetTable();
+                                           
+            Assert.That(table.Rows.Count, Is.EqualTo(3));
+            Assert.That(table.Rows[0].GetAllCells().Single().Lines, Is.EqualTo(new[] { "line1" }));
+            Assert.That(table.Rows[1].GetAllCells().Single().Lines, Is.EqualTo(new[] { "line2" }));
+            Assert.That(table.Rows[2].GetAllCells().Single().Lines, Is.EqualTo(new[] { "line3" }));
+        }
     }
 }

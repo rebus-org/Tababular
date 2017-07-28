@@ -24,13 +24,22 @@ namespace Tababular.Internals.Extractors
             {
                 var row = new Row();
 
-                foreach (var property in objectRow.GetType().GetProperties())
+                if (System.Convert.GetTypeCode(objectRow) == System.TypeCode.Object)
                 {
-                    var name = property.Name;
-                    var column = columns.GetOrAdd(name, _ => new Column(name));
-                    var value = property.GetValue(objectRow, null);
+                    foreach (var property in objectRow.GetType().GetProperties())
+                    {
+                        var name = property.Name;
+                        var column = columns.GetOrAdd(name, _ => new Column(name));
+                        var value = property.GetValue(objectRow, null);
 
-                    row.AddCell(column, new Cell(value));
+                        row.AddCell(column, new Cell(value));
+                    }
+                }
+                else
+                {
+                    string name = objectRow.GetType().Name;
+                    var column = columns.GetOrAdd(name, _ => new Column(name));
+                    row.AddCell(column, new Cell(objectRow));
                 }
 
                 rows.Add(row);
