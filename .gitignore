@@ -21,3 +21,5 @@ _ReSharper.*
 _NCrunch_*
 *.user
 *.backup
+
+AssemblyInfo_Patch.cs
