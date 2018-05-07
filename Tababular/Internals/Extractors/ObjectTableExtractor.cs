@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FastMember;
 using Tababular.Internals.Extensions;
 using Tababular.Internals.TableModel;
 
@@ -9,7 +11,7 @@ namespace Tababular.Internals.Extractors
     class ObjectTableExtractor : ITableExtractor
     {
         readonly List<object> _objectRows;
-
+        
         public ObjectTableExtractor(IEnumerable objectRows)
         {
             _objectRows = objectRows.Cast<object>().ToList();
@@ -19,25 +21,29 @@ namespace Tababular.Internals.Extractors
         {
             var columns = new Dictionary<string, Column>();
             var rows = new List<Row>();
+            var accessors = new Dictionary<Type, TypeAccessor>();
 
             foreach (var objectRow in _objectRows)
             {
                 var row = new Row();
+                var rowType = objectRow.GetType();
 
                 if (System.Convert.GetTypeCode(objectRow) == System.TypeCode.Object)
                 {
-                    foreach (var property in objectRow.GetType().GetProperties())
+                    var accessor = accessors.GetOrAdd(rowType, TypeAccessor.Create);
+
+                    foreach (var member in accessor.GetMembers())
                     {
-                        var name = property.Name;
+                        var name = member.Name;
                         var column = columns.GetOrAdd(name, _ => new Column(name));
-                        var value = property.GetValue(objectRow, null);
+                        var value = accessor[objectRow, name];
 
                         row.AddCell(column, new Cell(value));
                     }
                 }
                 else
                 {
-                    string name = objectRow.GetType().Name;
+                    var name = rowType.Name;
                     var column = columns.GetOrAdd(name, _ => new Column(name));
                     row.AddCell(column, new Cell(objectRow));
                 }
@@ -47,6 +53,5 @@ namespace Tababular.Internals.Extractors
 
             return new Table(columns.Values.ToList(), rows);
         }
-
     }
 }

@@ -26,14 +26,14 @@ namespace Tababular.Tests.Integration
 
             Assert.That(text.Normalized(), Is.EqualTo(@"
 
-=================================
++------------+------------------+
 | Id         | Value            |
-=================================
++------------+------------------+
 | whatever01 | jigeojgieojw     |
 | whatever02 | huiehguiw        |
 | whatever03 | nvnjkdnjkdsjkvds |
 | whatever04 | fjeiufhweui      |
-=================================
++------------+------------------+
 
 ".Normalized()));
         }
@@ -57,14 +57,14 @@ ruined the party!"},
             
             Assert.That(text.Normalized(), Is.EqualTo(@"
 
-==================================
++------------+-------------------+
 | Id         | Value             |
-==================================
++------------+-------------------+
 | whatever01 | jigeojgieojw      |
-==================================
++------------+-------------------+
 | whatever02 | huiehguiw         |
 |            | ruined the party! |
-==================================
++------------+-------------------+
 
 ".Normalized()));
         }

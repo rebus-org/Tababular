@@ -37,7 +37,39 @@ namespace Tababular.Tests.Examples
         }
 
         [Test]
-        public void Example3()
+        public void Example3_WithoutHint()
+        {
+            var objects = new[]
+            {
+                new {MachineName = "ctxtest01", Ip = "10.0.0.10", Ports = new[] {80, 8080, 9090}, Comments = ""},
+                new {MachineName = "ctxtest02", Ip = "10.0.0.11", Ports = new[] {5432},
+                    Comments = @"This bad boy hosts our database and a couple of internal jobs."}
+            };
+
+            var formatter = new TableFormatter();
+
+            var text = formatter.FormatObjects(objects);
+
+            Console.WriteLine(text);
+
+            /*
+
+====================================================================================
+| MachineName | Ip        | Ports | Comments                                       |
+====================================================================================
+| ctxtest01   | 10.0.0.10 | 80    |                                                |
+|             |           | 8080  |                                                |
+|             |           | 9090  |                                                |
+====================================================================================
+| ctxtest02   | 10.0.0.11 | 5432  | This bad boy hosts our database and a couple   |
+|             |           |       | of internal jobs.                              |
+====================================================================================
+            
+            */
+        }
+
+        [Test]
+        public void Example3_WithHint()
         {
             var objects = new[]
             {

@@ -73,21 +73,22 @@ namespace Tababular
                 EnforceMaxWidth(table, hints.MaxTableWidth.Value);
             }
 
-            const char horizontalLineChar = '=';
+            const char horizontalLineChar = '-';
             const char verticalLineChar = '|';
+            const char cornerChar = '+';
 
             var skipHorizontalLines = hints.CollapseVerticallyWhenSingleLine
                                       && !table.HasCellWith(c => c.Lines.Length > 1);
 
             var builder = new StringBuilder();
 
-            BuildHorizontalLine(table, builder, horizontalLineChar);
+            BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
 
             BuildColumnLabels(table, builder, verticalLineChar);
 
             if (skipHorizontalLines)
             {
-                BuildHorizontalLine(table, builder, horizontalLineChar);
+                BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
             }
 
             if (table.Rows.Any())
@@ -96,14 +97,14 @@ namespace Tababular
                 {
                     if (!skipHorizontalLines)
                     {
-                        BuildHorizontalLine(table, builder, horizontalLineChar);
+                        BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
                     }
 
                     BuildTableRow(row, table, builder, verticalLineChar);
                 }
             }
 
-            BuildHorizontalLine(table, builder, horizontalLineChar);
+            BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
 
             return builder.ToString();
         }
@@ -183,14 +184,23 @@ namespace Tababular
             }
         }
 
-        static void BuildHorizontalLine(Table table, StringBuilder builder, char c)
+        static void BuildHorizontalLine(Table table, StringBuilder builder, char lineCharacter, char cornerCharacter)
         {
-            foreach (var column in table.Columns)
+            var columns = table.Columns;
+
+            if (!columns.Any())
             {
-                builder.Append(new string(c, column.Width + column.Padding));
+                return;
             }
 
-            builder.Append(c);
+
+            foreach (var column in columns)
+            {
+                builder.Append(cornerCharacter);
+                builder.Append(new string(lineCharacter, column.Width + column.Padding - 1));
+            }
+
+            builder.Append(cornerCharacter);
 
             builder.AppendLine();
         }
