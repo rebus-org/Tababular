@@ -1,10 +1,10 @@
 image: Visual Studio 2017
 
-shallow_clone: true
+#shallow_clone: true
 
-cache:
-  - packages -> **\packages.config
-  - '%LocalAppData%\NuGet\Cache'
+#cache:
+#  - packages -> **\packages.config
+#  - '%LocalAppData%\NuGet\Cache'
 
 before_build:
   - appveyor-retry dotnet restore -v Minimal
