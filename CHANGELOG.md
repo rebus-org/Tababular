@@ -34,7 +34,7 @@
 * No longer merge JSON.NET
 * Skip property enumeration for primitive-like types - thanks [gary-palmer]
 
-## 3.0.0-b02
+## 3.0.0
 
 * Change style to contain more space visually
 * Use FastMember for ultra-fast reflection
