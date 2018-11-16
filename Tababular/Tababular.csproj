@@ -52,7 +52,4 @@
     <PackageReference Include="fastmember" Version="1.3.0" />
     <PackageReference Include="newtonsoft.json" Version="10.0.2" />
   </ItemGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(ProjectDir)..\scripts\patch_assemblyinfo.cmd $(ProjectDir)" />
-  </Target>
 </Project>
