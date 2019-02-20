@@ -11,7 +11,7 @@ namespace Tababular.Internals.Extractors
     class ObjectTableExtractor : ITableExtractor
     {
         readonly List<object> _objectRows;
-        
+
         public ObjectTableExtractor(IEnumerable objectRows)
         {
             _objectRows = objectRows.Cast<object>().ToList();
@@ -21,18 +21,20 @@ namespace Tababular.Internals.Extractors
         {
             var columns = new Dictionary<string, Column>();
             var rows = new List<Row>();
-            var accessors = new Dictionary<Type, TypeAccessor>();
+            var typeAccessors = new Dictionary<Type, TypeAccessor>();
+            var memberLists = new Dictionary<Type, Member[]>();
 
             foreach (var objectRow in _objectRows)
             {
                 var row = new Row();
                 var rowType = objectRow.GetType();
 
-                if (System.Convert.GetTypeCode(objectRow) == System.TypeCode.Object)
+                if (Convert.GetTypeCode(objectRow) == TypeCode.Object)
                 {
-                    var accessor = accessors.GetOrAdd(rowType, TypeAccessor.Create);
+                    var accessor = typeAccessors.GetOrAdd(rowType, TypeAccessor.Create);
+                    var members = memberLists.GetOrAdd(rowType, type => GetMemberAccessors(accessor, type));
 
-                    foreach (var member in accessor.GetMembers())
+                    foreach (var member in members)
                     {
                         var name = member.Name;
                         var column = columns.GetOrAdd(name, _ => new Column(name));
@@ -52,6 +54,26 @@ namespace Tababular.Internals.Extractors
             }
 
             return new Table(columns.Values.ToList(), rows);
+        }
+
+        static Member[] GetMemberAccessors(TypeAccessor accessor, Type type)
+        {
+            var memberSet = accessor.GetMembers();
+
+            try
+            {
+                var orderDictionary = type.GetProperties()
+                    .Select((property, index) => new {property, index})
+                    .ToDictionary(a => a.property.Name, a => a.index);
+
+                return memberSet
+                    .OrderBy(m => orderDictionary[m.Name])
+                    .ToArray();
+            }
+            catch
+            {
+                return memberSet.ToArray();
+            }
         }
     }
 }

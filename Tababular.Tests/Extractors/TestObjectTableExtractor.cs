@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Tababular.Internals.Extractors;
+using Tababular.Internals.TableModel;
 
 namespace Tababular.Tests.Extractors
 {
@@ -98,13 +99,49 @@ namespace Tababular.Tests.Extractors
         public void CanExtractListOfPrimitiveObjects()
         {
             var objects = new List<string> { "line1", "line2", "line3" };
-            
+
             var table = new ObjectTableExtractor(objects).GetTable();
-                                           
+
             Assert.That(table.Rows.Count, Is.EqualTo(3));
             Assert.That(table.Rows[0].GetAllCells().Single().Lines, Is.EqualTo(new[] { "line1" }));
             Assert.That(table.Rows[1].GetAllCells().Single().Lines, Is.EqualTo(new[] { "line2" }));
             Assert.That(table.Rows[2].GetAllCells().Single().Lines, Is.EqualTo(new[] { "line3" }));
+        }
+
+        [Test]
+        public void ExtractsColumnsOrderedByHowCodeIsWritten()
+        {
+            var objects = new List<SampleRow>
+            {
+                new SampleRow("1", "2", "3", "4"),
+                new SampleRow("10", "20", "30", "40"),
+                new SampleRow("100", "200", "300", "400"),
+            };
+
+            var table = new ObjectTableExtractor(objects).GetTable();
+
+            string[] GetCells(Row row) => row.GetAllCells().Select(cell => cell.TextValue).ToArray();
+
+            Assert.That(table.Rows.Count, Is.EqualTo(3));
+            Assert.That(GetCells(table.Rows[0]), Is.EqualTo(new[] { "1", "2", "3", "4" }));
+            Assert.That(GetCells(table.Rows[1]), Is.EqualTo(new[] { "10", "20", "30", "40" }));
+            Assert.That(GetCells(table.Rows[2]), Is.EqualTo(new[] { "100", "200", "300", "400" }));
+        }
+
+        class SampleRow
+        {
+            public SampleRow(string firstColumn, string secondColumn, string thirdColumn, string fourthColumn)
+            {
+                FirstColumn = firstColumn;
+                SecondColumn = secondColumn;
+                ThirdColumn = thirdColumn;
+                FourthColumn = fourthColumn;
+            }
+
+            public string FirstColumn { get; }
+            public string SecondColumn { get; }
+            public string ThirdColumn { get; }
+            public string FourthColumn { get; }
         }
     }
 }

@@ -40,5 +40,9 @@
 * Use FastMember for ultra-fast reflection
 * Add .NET Standard 2.0 as a target
 
+## 3.0.1
+
+* When formatting objects, columns are now returned in the order the corresponding properties are defined
+
 
 [gary-palmer]: https://github.com/gary-palmer
