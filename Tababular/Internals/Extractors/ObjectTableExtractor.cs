@@ -14,6 +14,7 @@ namespace Tababular.Internals.Extractors
 
         public ObjectTableExtractor(IEnumerable objectRows)
         {
+            if (objectRows == null) throw new ArgumentNullException(nameof(objectRows));
             _objectRows = objectRows.Cast<object>().ToList();
         }
 

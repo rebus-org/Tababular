@@ -13,7 +13,7 @@ namespace Tababular.Internals.Extractors
 
         public JsonTableExtractor(string jsonText)
         {
-            _jsonText = jsonText;
+            _jsonText = jsonText ?? throw new ArgumentNullException(nameof(jsonText));
         }
 
         public Table GetTable()
@@ -118,7 +118,6 @@ namespace Tababular.Internals.Extractors
             }
 
             return new Table(columns.Values.ToList(), rows);
-
         }
 
         static string GetAsLines(JToken value)

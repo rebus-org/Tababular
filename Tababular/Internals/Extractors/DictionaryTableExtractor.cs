@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tababular.Internals.Extensions;
 using Tababular.Internals.TableModel;
@@ -11,6 +12,7 @@ namespace Tababular.Internals.Extractors
 
         public DictionaryTableExtractor(IEnumerable<IDictionary<string, object>> rows)
         {
+            if (rows == null) throw new ArgumentNullException(nameof(rows));
             _rows = rows.ToList();
         }
 
@@ -35,7 +37,6 @@ namespace Tababular.Internals.Extractors
             }
 
             return new Table(columns.Values.ToList(), rows);
-
         }
     }
 }
