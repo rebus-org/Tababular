@@ -1,13 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tababular", "Tababular\Tababular.csproj", "{94EDA166-33F2-4D88-B5B4-268429254205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tababular", "Tababular\Tababular.csproj", "{94EDA166-33F2-4D88-B5B4-268429254205}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tababular.Tests", "Tababular.Tests\Tababular.Tests.csproj", "{512230FE-18E5-4C59-9AE8-6432B0A6143A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tababular.Tests", "Tababular.Tests\Tababular.Tests.csproj", "{512230FE-18E5-4C59-9AE8-6432B0A6143A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stuff", "stuff", "{D6C5120D-809A-41A0-9B0C-4149C88C56E1}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		CHANGELOG.md = CHANGELOG.md
 		LICENSE.md = LICENSE.md
 		README.md = README.md
@@ -35,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC8EE34B-6F42-4342-BDE1-B52E5407D906}
 	EndGlobalSection
 EndGlobal

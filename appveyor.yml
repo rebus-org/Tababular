@@ -1,10 +1,4 @@
-image: Visual Studio 2017
-
-#shallow_clone: true
-
-#cache:
-#  - packages -> **\packages.config
-#  - '%LocalAppData%\NuGet\Cache'
+image: Visual Studio 2019
 
 before_build:
   - appveyor-retry dotnet restore -v Minimal
