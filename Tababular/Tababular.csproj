@@ -36,7 +36,7 @@
     <DocumentationFile>bin\Release\Tababular.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="fastmember" Version="1.3.0" />
-    <PackageReference Include="newtonsoft.json" Version="10.0.2" />
+    <PackageReference Include="fastmember" Version="1.5.0" />
+    <PackageReference Include="newtonsoft.json" Version="12.0.3" />
   </ItemGroup>
 </Project>
