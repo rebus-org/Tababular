@@ -39,7 +39,20 @@ namespace Tababular.Internals.Extractors
                     {
                         var name = member.Name;
                         var column = columns.GetOrAdd(name, _ => new Column(name));
-                        var value = accessor[objectRow, name];
+
+                        object GetValue()
+                        {
+                            try
+                            {
+                                return accessor[objectRow, name];
+                            }
+                            catch (Exception exception)
+                            {
+                                throw new ArgumentException($"Could not get value from property '{name}' of {rowType}", exception);
+                            }
+                        }
+
+                        var value = GetValue();
 
                         row.AddCell(column, new Cell(value));
                     }
