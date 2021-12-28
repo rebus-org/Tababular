@@ -2,11 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
  <PropertyGroup>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tababular</RootNamespace>
-    <AssemblyName>Tababular</AssemblyName>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Authors>mookid8000</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/rebus-org/Tababular/master/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/rebus-org/Tababular</PackageProjectUrl>
@@ -14,29 +10,10 @@
     <PackageTags>console</PackageTags>
     <RepositoryUrl>https://github.com/rebus-org/Tabababular</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Tababular.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>RELEASE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Release\Tababular.xml</DocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="fastmember" Version="1.5.0" />
-    <PackageReference Include="newtonsoft.json" Version="12.0.3" />
+    <PackageReference Include="newtonsoft.json" Version="13.0.1" />
   </ItemGroup>
 </Project>
