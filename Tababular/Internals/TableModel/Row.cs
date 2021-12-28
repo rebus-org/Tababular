@@ -1,49 +1,48 @@
 using System;
 using System.Collections.Generic;
 
-namespace Tababular.Internals.TableModel
+namespace Tababular.Internals.TableModel;
+
+class Row
 {
-    class Row
+    readonly Dictionary<Column, Cell> _cells = new();
+
+    public void AddCell(Column column, Cell cell)
     {
-        readonly Dictionary<Column, Cell> _cells = new Dictionary<Column, Cell>();
-
-        public void AddCell(Column column, Cell cell)
+        try
         {
-            try
-            {
-                _cells.Add(column, cell);
+            _cells.Add(column, cell);
 
-                AdjustHeight(cell);
-            }
-            catch (Exception exception)
-            {
-                throw new InvalidOperationException($"Tried to add cell '{cell}' to row as column '{column.Label}', but the row had this cell already: '{_cells[column]}'", exception);
-            }
+            AdjustHeight(cell);
         }
-
-        public Cell GetCellOrNull(Column column)
+        catch (Exception exception)
         {
-            Cell cell;
-
-            return _cells.TryGetValue(column, out cell)
-                ? cell
-                : null;
+            throw new InvalidOperationException($"Tried to add cell '{cell}' to row as column '{column.Label}', but the row had this cell already: '{_cells[column]}'", exception);
         }
+    }
 
-        void AdjustHeight(Cell cell)
-        {
-            var numberOfLines = cell.GetHeight();
+    public Cell GetCellOrNull(Column column)
+    {
+        Cell cell;
 
-            if (numberOfLines < Height) return;
+        return _cells.TryGetValue(column, out cell)
+            ? cell
+            : null;
+    }
 
-            Height = numberOfLines;
-        }
+    void AdjustHeight(Cell cell)
+    {
+        var numberOfLines = cell.GetHeight();
 
-        public int Height { get; private set; }
+        if (numberOfLines < Height) return;
 
-        public IEnumerable<Cell> GetAllCells()
-        {
-            return _cells.Values;
-        }
+        Height = numberOfLines;
+    }
+
+    public int Height { get; private set; }
+
+    public IEnumerable<Cell> GetAllCells()
+    {
+        return _cells.Values;
     }
 }

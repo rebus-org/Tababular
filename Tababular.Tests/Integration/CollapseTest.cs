@@ -2,29 +2,29 @@
 using NUnit.Framework;
 using Tababular.Tests.Ex;
 
-namespace Tababular.Tests.Integration
+namespace Tababular.Tests.Integration;
+
+[TestFixture]
+public class CollapseTest
 {
-    [TestFixture]
-    public class CollapseTest
+    [Test]
+    public void CanCollapseTable()
     {
-        [Test]
-        public void CanCollapseTable()
+        var objects = new[]
         {
-            var objects = new[]
-            {
-                new {Id = "whatever01", Value = "jigeojgieojw"},
-                new {Id = "whatever02", Value = "huiehguiw"},
-                new {Id = "whatever03", Value = "nvnjkdnjkdsjkvds"},
-                new {Id = "whatever04", Value = "fjeiufhweui"}
-            };
+            new {Id = "whatever01", Value = "jigeojgieojw"},
+            new {Id = "whatever02", Value = "huiehguiw"},
+            new {Id = "whatever03", Value = "nvnjkdnjkdsjkvds"},
+            new {Id = "whatever04", Value = "fjeiufhweui"}
+        };
 
-            var formatter = new TableFormatter(new Hints { CollapseVerticallyWhenSingleLine = true });
+        var formatter = new TableFormatter(new Hints { CollapseVerticallyWhenSingleLine = true });
 
-            var text = formatter.FormatObjects(objects);
+        var text = formatter.FormatObjects(objects);
 
-            Console.WriteLine(text);
+        Console.WriteLine(text);
 
-            Assert.That(text.Normalized(), Is.EqualTo(@"
+        Assert.That(text.Normalized(), Is.EqualTo(@"
 
 +------------+------------------+
 | Id         | Value            |
@@ -36,26 +36,26 @@ namespace Tababular.Tests.Integration
 +------------+------------------+
 
 ".Normalized()));
-        }
+    }
 
-        [Test]
-        public void DoesNotCollapseWhenCellHasMoreLines()
+    [Test]
+    public void DoesNotCollapseWhenCellHasMoreLines()
+    {
+        var objects = new[]
         {
-            var objects = new[]
-            {
-                new {Id = "whatever01", Value = "jigeojgieojw"},
-                new {Id = "whatever02", Value = @"huiehguiw
+            new {Id = "whatever01", Value = "jigeojgieojw"},
+            new {Id = "whatever02", Value = @"huiehguiw
 ruined the party!"},
-            };
+        };
 
 
-            var formatter = new TableFormatter(new Hints { CollapseVerticallyWhenSingleLine = true });
+        var formatter = new TableFormatter(new Hints { CollapseVerticallyWhenSingleLine = true });
 
-            var text = formatter.FormatObjects(objects);
+        var text = formatter.FormatObjects(objects);
 
-            Console.WriteLine(text);
+        Console.WriteLine(text);
             
-            Assert.That(text.Normalized(), Is.EqualTo(@"
+        Assert.That(text.Normalized(), Is.EqualTo(@"
 
 +------------+-------------------+
 | Id         | Value             |
@@ -67,6 +67,5 @@ ruined the party!"},
 +------------+-------------------+
 
 ".Normalized()));
-        }
     }
 }

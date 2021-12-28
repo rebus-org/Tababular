@@ -1,41 +1,40 @@
-﻿namespace Tababular.Internals.TableModel
+﻿namespace Tababular.Internals.TableModel;
+
+class Column
 {
-    class Column
+    public Column(string label)
     {
-        public Column(string label)
-        {
-            Label = label ?? "";
+        Label = label ?? "";
 
-            Padding = 1;
+        Padding = 1;
 
-            AdjustForWidth(Label.Length);
-        }
+        AdjustForWidth(Label.Length);
+    }
 
-        public string Label { get; }
+    public string Label { get; }
 
-        public int Width { get; private set; }
+    public int Width { get; private set; }
 
-        public int Padding { get; }
+    public int Padding { get; }
 
-        public void AdjustWidth(Cell cell)
-        {
-            var cellWidth = cell.GetWidth();
+    public void AdjustWidth(Cell cell)
+    {
+        var cellWidth = cell.GetWidth();
 
-            AdjustForWidth(cellWidth);
-        }
+        AdjustForWidth(cellWidth);
+    }
 
-        void AdjustForWidth(int cellWidth)
-        {
-            var width = cellWidth + 2 * Padding;
+    void AdjustForWidth(int cellWidth)
+    {
+        var width = cellWidth + 2 * Padding;
 
-            if (width < Width) return;
+        if (width < Width) return;
 
-            Width = width;
-        }
+        Width = width;
+    }
 
-        public void ConstrainWidth(int newWidth)
-        {
-            Width = newWidth;
-        }
+    public void ConstrainWidth(int newWidth)
+    {
+        Width = newWidth;
     }
 }

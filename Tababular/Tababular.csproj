@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
- <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Authors>mookid8000</Authors>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/rebus-org/Tababular/master/LICENSE.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/rebus-org/Tababular</PackageProjectUrl>
-    <Copyright>Copyright 2016-2017</Copyright>
-    <PackageTags>console</PackageTags>
-    <RepositoryUrl>https://github.com/rebus-org/Tabababular</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="fastmember" Version="1.5.0" />
-    <PackageReference Include="newtonsoft.json" Version="13.0.1" />
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<LangVersion>10</LangVersion>
+		<Authors>mookid8000</Authors>
+		<PackageLicenseUrl>https://raw.githubusercontent.com/rebus-org/Tababular/master/LICENSE.md</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/rebus-org/Tababular</PackageProjectUrl>
+		<Copyright>Copyright 2016-2017</Copyright>
+		<PackageTags>console</PackageTags>
+		<RepositoryUrl>https://github.com/rebus-org/Tabababular</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="fastmember" Version="1.5.0" />
+		<PackageReference Include="newtonsoft.json" Version="13.0.1" />
+	</ItemGroup>
 </Project>

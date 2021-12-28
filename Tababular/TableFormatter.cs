@@ -62,10 +62,10 @@ namespace Tababular
             return FormatTable(table, _hints);
         }
 
-        internal static string FormatTable(Table table, Hints hints = null)
-        {
-            hints = hints ?? new Hints();
+        internal static string FormatTable(Table table, Hints hints = null) => InnerFormatTable(table, hints ?? new Hints());
 
+        static string InnerFormatTable(Table table, Hints hints)
+        {
             if (!table.Columns.Any()) return "";
 
             if (hints.MaxTableWidth.HasValue)
@@ -107,6 +107,7 @@ namespace Tababular
             BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
 
             return builder.ToString();
+
         }
 
         static void EnforceMaxWidth(Table table, int maxWidth)

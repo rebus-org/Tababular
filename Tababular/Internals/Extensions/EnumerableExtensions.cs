@@ -1,28 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Tababular.Internals.Extensions
+namespace Tababular.Internals.Extensions;
+
+static class EnumerableExtensions
 {
-    static class EnumerableExtensions
+    public static IEnumerable<IEnumerable<TItem>> Batch<TItem>(this IEnumerable<TItem> items, int maxBatchSize)
     {
-        public static IEnumerable<IEnumerable<TItem>> Batch<TItem>(this IEnumerable<TItem> items, int maxBatchSize)
+        var list = new List<TItem>();
+
+        foreach (var item in items)
         {
-            var list = new List<TItem>();
+            list.Add(item);
 
-            foreach (var item in items)
-            {
-                list.Add(item);
+            if (list.Count < maxBatchSize) continue;
 
-                if (list.Count < maxBatchSize) continue;
+            yield return list;
+            list = new List<TItem>();
+        }
 
-                yield return list;
-                list = new List<TItem>();
-            }
-
-            if (list.Any())
-            {
-                yield return list;
-            }
+        if (list.Any())
+        {
+            yield return list;
         }
     }
 }

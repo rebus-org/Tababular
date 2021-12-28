@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tababular.Internals.Extensions
+namespace Tababular.Internals.Extensions;
+
+static class DictionaryExtensions
 {
-    static class DictionaryExtensions
+    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> newValueFactory)
     {
-        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> newValueFactory)
-        {
-            TValue existing;
+        if (dictionary.TryGetValue(key, out var existing)) return existing;
 
-            if (dictionary.TryGetValue(key, out existing))
-                return existing;
+        var newValue = newValueFactory(key);
 
-            var newValue = newValueFactory(key);
+        dictionary[key] = newValue;
 
-            dictionary[key] = newValue;
-
-            return newValue;
-        }
+        return newValue;
     }
 }

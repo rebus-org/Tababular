@@ -1,9 +1,8 @@
 ﻿using Tababular.Internals.TableModel;
 
-namespace Tababular.Internals
+namespace Tababular.Internals;
+
+interface ITableExtractor
 {
-    interface ITableExtractor
-    {
-        Table GetTable();
-    }
+    Table GetTable();
 }

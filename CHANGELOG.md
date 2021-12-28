@@ -37,5 +37,8 @@
 ## 4.0.0
 * Better exception when value extraction fails on object
 
+## 4.1.0
+* Update some packages, modernize code base
+
 
 [gary-palmer]: https://github.com/gary-palmer

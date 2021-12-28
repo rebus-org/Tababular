@@ -6,88 +6,87 @@ using FastMember;
 using Tababular.Internals.Extensions;
 using Tababular.Internals.TableModel;
 
-namespace Tababular.Internals.Extractors
+namespace Tababular.Internals.Extractors;
+
+class ObjectTableExtractor : ITableExtractor
 {
-    class ObjectTableExtractor : ITableExtractor
+    readonly List<object> _objectRows;
+
+    public ObjectTableExtractor(IEnumerable objectRows)
     {
-        readonly List<object> _objectRows;
+        if (objectRows == null) throw new ArgumentNullException(nameof(objectRows));
+        _objectRows = objectRows.Cast<object>().ToList();
+    }
 
-        public ObjectTableExtractor(IEnumerable objectRows)
+    public Table GetTable()
+    {
+        var columns = new Dictionary<string, Column>();
+        var rows = new List<Row>();
+        var typeAccessors = new Dictionary<Type, TypeAccessor>();
+        var memberLists = new Dictionary<Type, Member[]>();
+
+        foreach (var objectRow in _objectRows)
         {
-            if (objectRows == null) throw new ArgumentNullException(nameof(objectRows));
-            _objectRows = objectRows.Cast<object>().ToList();
-        }
+            var row = new Row();
+            var rowType = objectRow.GetType();
 
-        public Table GetTable()
-        {
-            var columns = new Dictionary<string, Column>();
-            var rows = new List<Row>();
-            var typeAccessors = new Dictionary<Type, TypeAccessor>();
-            var memberLists = new Dictionary<Type, Member[]>();
-
-            foreach (var objectRow in _objectRows)
+            if (Convert.GetTypeCode(objectRow) == TypeCode.Object)
             {
-                var row = new Row();
-                var rowType = objectRow.GetType();
+                var accessor = typeAccessors.GetOrAdd(rowType, TypeAccessor.Create);
+                var members = memberLists.GetOrAdd(rowType, type => GetMemberAccessors(accessor, type));
 
-                if (Convert.GetTypeCode(objectRow) == TypeCode.Object)
+                foreach (var member in members)
                 {
-                    var accessor = typeAccessors.GetOrAdd(rowType, TypeAccessor.Create);
-                    var members = memberLists.GetOrAdd(rowType, type => GetMemberAccessors(accessor, type));
-
-                    foreach (var member in members)
-                    {
-                        var name = member.Name;
-                        var column = columns.GetOrAdd(name, _ => new Column(name));
-
-                        object GetValue()
-                        {
-                            try
-                            {
-                                return accessor[objectRow, name];
-                            }
-                            catch (Exception exception)
-                            {
-                                throw new ArgumentException($"Could not get value from property '{name}' of {rowType}", exception);
-                            }
-                        }
-
-                        var value = GetValue();
-
-                        row.AddCell(column, new Cell(value));
-                    }
-                }
-                else
-                {
-                    var name = rowType.Name;
+                    var name = member.Name;
                     var column = columns.GetOrAdd(name, _ => new Column(name));
-                    row.AddCell(column, new Cell(objectRow));
-                }
 
-                rows.Add(row);
+                    object GetValue()
+                    {
+                        try
+                        {
+                            return accessor[objectRow, name];
+                        }
+                        catch (Exception exception)
+                        {
+                            throw new ArgumentException($"Could not get value from property '{name}' of {rowType}", exception);
+                        }
+                    }
+
+                    var value = GetValue();
+
+                    row.AddCell(column, new Cell(value));
+                }
+            }
+            else
+            {
+                var name = rowType.Name;
+                var column = columns.GetOrAdd(name, _ => new Column(name));
+                row.AddCell(column, new Cell(objectRow));
             }
 
-            return new Table(columns.Values.ToList(), rows);
+            rows.Add(row);
         }
 
-        static Member[] GetMemberAccessors(TypeAccessor accessor, Type type)
+        return new Table(columns.Values.ToList(), rows);
+    }
+
+    static Member[] GetMemberAccessors(TypeAccessor accessor, Type type)
+    {
+        var memberSet = accessor.GetMembers();
+
+        try
         {
-            var memberSet = accessor.GetMembers();
+            var orderDictionary = type.GetProperties()
+                .Select((property, index) => new {property, index})
+                .ToDictionary(a => a.property.Name, a => a.index);
 
-            try
-            {
-                var orderDictionary = type.GetProperties()
-                    .Select((property, index) => new {property, index})
-                    .ToDictionary(a => a.property.Name, a => a.index);
-
-                return memberSet
-                    .OrderBy(m => orderDictionary[m.Name])
-                    .ToArray();
-            }
-            catch
-            {
-                return memberSet.ToArray();
-            }
+            return memberSet
+                .OrderBy(m => orderDictionary[m.Name])
+                .ToArray();
+        }
+        catch
+        {
+            return memberSet.ToArray();
         }
     }
 }

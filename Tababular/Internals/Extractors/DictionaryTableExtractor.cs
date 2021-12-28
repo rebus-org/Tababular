@@ -4,39 +4,38 @@ using System.Linq;
 using Tababular.Internals.Extensions;
 using Tababular.Internals.TableModel;
 
-namespace Tababular.Internals.Extractors
+namespace Tababular.Internals.Extractors;
+
+class DictionaryTableExtractor : ITableExtractor
 {
-    class DictionaryTableExtractor : ITableExtractor
+    readonly List<IDictionary<string, object>> _rows;
+
+    public DictionaryTableExtractor(IEnumerable<IDictionary<string, object>> rows)
     {
-        readonly List<IDictionary<string, object>> _rows;
+        if (rows == null) throw new ArgumentNullException(nameof(rows));
+        _rows = rows.ToList();
+    }
 
-        public DictionaryTableExtractor(IEnumerable<IDictionary<string, object>> rows)
+    public Table GetTable()
+    {
+        var columns = new Dictionary<string, Column>();
+        var rows = new List<Row>();
+
+        foreach (var dictRow in _rows)
         {
-            if (rows == null) throw new ArgumentNullException(nameof(rows));
-            _rows = rows.ToList();
-        }
+            var row = new Row();
 
-        public Table GetTable()
-        {
-            var columns = new Dictionary<string, Column>();
-            var rows = new List<Row>();
-
-            foreach (var dictRow in _rows)
+            foreach (var name in dictRow.Keys)
             {
-                var row = new Row();
+                var column = columns.GetOrAdd(name, _ => new Column(name));
+                var value = dictRow[name];
 
-                foreach (var name in dictRow.Keys)
-                {
-                    var column = columns.GetOrAdd(name, _ => new Column(name));
-                    var value = dictRow[name];
-
-                    row.AddCell(column, new Cell(value));
-                }
-
-                rows.Add(row);
+                row.AddCell(column, new Cell(value));
             }
 
-            return new Table(columns.Values.ToList(), rows);
+            rows.Add(row);
         }
+
+        return new Table(columns.Values.ToList(), rows);
     }
 }
