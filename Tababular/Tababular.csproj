@@ -5,9 +5,8 @@
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<LangVersion>10</LangVersion>
 		<Authors>mookid8000</Authors>
-		<PackageLicenseUrl>https://raw.githubusercontent.com/rebus-org/Tababular/master/LICENSE.md</PackageLicenseUrl>
 		<PackageProjectUrl>https://github.com/rebus-org/Tababular</PackageProjectUrl>
-		<Copyright>Copyright 2016-2017</Copyright>
+		<Copyright>Copyright 2016</Copyright>
 		<PackageTags>console</PackageTags>
 		<RepositoryUrl>https://github.com/rebus-org/Tabababular</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
