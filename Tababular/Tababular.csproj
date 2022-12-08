@@ -14,6 +14,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="fastmember" Version="1.5.0" />
-		<PackageReference Include="newtonsoft.json" Version="13.0.1" />
+		<PackageReference Include="newtonsoft.json" Version="13.0.2" />
 	</ItemGroup>
 </Project>
