@@ -40,5 +40,8 @@
 ## 4.1.0
 * Update some packages, modernize code base
 
+## 4.2.0
+* Make newline character sequence configurable - thanks [antifree]
 
+[antifree]: https://github.com/antifree
 [gary-palmer]: https://github.com/gary-palmer

@@ -5,9 +5,9 @@
     <TargetFrameworks>net6.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="microsoft.net.test.sdk" Version="17.0.0" />
-    <PackageReference Include="nunit" Version="3.13.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
+    <PackageReference Include="microsoft.net.test.sdk" Version="17.10.0" />
+    <PackageReference Include="nunit" Version="4.1.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tababular\Tababular.csproj" />

@@ -13,7 +13,8 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 	<ItemGroup>
+		<!-- ReSharper disable once VulnerablePackage -->
 		<PackageReference Include="fastmember" Version="1.5.0" />
-		<PackageReference Include="newtonsoft.json" Version="13.0.1" />
+		<PackageReference Include="newtonsoft.json" Version="13.0.3" />
 	</ItemGroup>
 </Project>
