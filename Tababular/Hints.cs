@@ -1,4 +1,6 @@
-﻿namespace Tababular;
+﻿using System;
+
+namespace Tababular;
 
 /// <summary>
 /// Represents some hints on how to format things
@@ -15,4 +17,10 @@ public class Hints
     /// when no cell has more than one line
     /// </summary>
     public bool CollapseVerticallyWhenSingleLine { get; set; }
+
+    /// <summary>
+    /// Can be used to specify the separator that the table formatter will use for new lines.
+    /// By default has value of <see cref="Environment.NewLine"/>
+    /// </summary>
+    public string NewLineSeparator { get; set; } = Environment.NewLine;
 }

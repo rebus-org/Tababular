@@ -82,13 +82,13 @@ namespace Tababular
 
             var builder = new StringBuilder();
 
-            BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
+            BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar, hints.NewLineSeparator);
 
-            BuildColumnLabels(table, builder, verticalLineChar);
+            BuildColumnLabels(table, builder, verticalLineChar, hints.NewLineSeparator);
 
             if (skipHorizontalLines)
             {
-                BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
+                BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar, hints.NewLineSeparator);
             }
 
             if (table.Rows.Any())
@@ -97,14 +97,14 @@ namespace Tababular
                 {
                     if (!skipHorizontalLines)
                     {
-                        BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
+                        BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar, hints.NewLineSeparator);
                     }
 
-                    BuildTableRow(row, table, builder, verticalLineChar);
+                    BuildTableRow(row, table, builder, verticalLineChar, hints.NewLineSeparator);
                 }
             }
 
-            BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar);
+            BuildHorizontalLine(table, builder, horizontalLineChar, cornerChar, hints.NewLineSeparator);
 
             return builder.ToString();
 
@@ -139,7 +139,7 @@ namespace Tababular
             }
         }
 
-        static void BuildColumnLabels(Table table, StringBuilder builder, char verticalLineChar)
+        static void BuildColumnLabels(Table table, StringBuilder builder, char verticalLineChar, string newLineChar)
         {
             var texts = table.Columns
                 .Select(column => new
@@ -149,10 +149,10 @@ namespace Tababular
                 })
                 .ToDictionary(a => a.Column, a => a.Text);
 
-            BuildRow(texts, table, builder, verticalLineChar);
+            BuildRow(texts, table, builder, verticalLineChar, newLineChar);
         }
 
-        static void BuildTableRow(Row row, Table table, StringBuilder builder, char verticalLineChar)
+        static void BuildTableRow(Row row, Table table, StringBuilder builder, char verticalLineChar, string newLineChar)
         {
             var texts = table.Columns
                 .Select(column => new
@@ -162,10 +162,10 @@ namespace Tababular
                 })
                 .ToDictionary(a => a.Column, a => a.Text);
 
-            BuildRow(texts, table, builder, verticalLineChar);
+            BuildRow(texts, table, builder, verticalLineChar, newLineChar);
         }
 
-        static void BuildRow(Dictionary<Column, string[]> texts, Table table, StringBuilder builder, char verticalLineChar)
+        static void BuildRow(Dictionary<Column, string[]> texts, Table table, StringBuilder builder, char verticalLineChar, string newLineChar)
         {
             for (var index = 0; index < texts.Values.Max(l => l.Length); index++)
             {
@@ -181,11 +181,11 @@ namespace Tababular
                     builder.Append(verticalLineChar);
                 }
 
-                builder.AppendLine();
+                builder.Append(newLineChar);
             }
         }
 
-        static void BuildHorizontalLine(Table table, StringBuilder builder, char lineCharacter, char cornerCharacter)
+        static void BuildHorizontalLine(Table table, StringBuilder builder, char lineCharacter, char cornerCharacter, string newLineChar)
         {
             var columns = table.Columns;
 
@@ -203,7 +203,7 @@ namespace Tababular
 
             builder.Append(cornerCharacter);
 
-            builder.AppendLine();
+            builder.Append(newLineChar);
         }
     }
 }
