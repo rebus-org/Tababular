@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 ## 1.0.0
 * Made Tababular
@@ -42,6 +42,9 @@
 
 ## 4.2.0
 * Make newline character sequence configurable - thanks [antifree]
+
+## 4.3.0
+* Add logo 🤩
 
 [antifree]: https://github.com/antifree
 [gary-palmer]: https://github.com/gary-palmer

@@ -11,7 +11,19 @@
 		<RepositoryUrl>https://github.com/rebus-org/Tabababular</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>tababular_logo.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Include="..\artwork\tababular_logo.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 	<ItemGroup>
 		<!-- ReSharper disable once VulnerablePackage -->
 		<PackageReference Include="fastmember" Version="1.5.0" />
