@@ -1,8 +1,7 @@
-image: Visual Studio 2022
+image: Visual Studio 2026
 
 before_build:
   - appveyor-retry dotnet restore -v Minimal
 
 build_script:
-  - dotnet build Tababular -c Release 
-  - dotnet build Tababular.Tests -c Release 
+  - dotnet build -c Release 
