@@ -49,5 +49,8 @@
 ## 4.4.0
 * Update dependencies
 
+## 4.4.1
+* Repair logo
+
 [antifree]: https://github.com/antifree
 [gary-palmer]: https://github.com/gary-palmer
