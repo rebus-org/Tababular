@@ -1,12 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
-		<LangVersion>10</LangVersion>
+		<LangVersion>14</LangVersion>
 		<Authors>mookid8000</Authors>
 		<PackageProjectUrl>https://github.com/rebus-org/Tababular</PackageProjectUrl>
-		<Copyright>Copyright 2016</Copyright>
+		<Copyright>Copyright 2026</Copyright>
 		<PackageTags>console</PackageTags>
 		<RepositoryUrl>https://github.com/rebus-org/Tabababular</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
@@ -14,19 +14,22 @@
 		<PackageIcon>tababular_logo.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+	
 	<ItemGroup>
-	  <None Include="..\artwork\tababular_logo.png">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Include="..\README.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Include="..\artwork\tababular_logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
+	
 	<ItemGroup>
 		<!-- ReSharper disable once VulnerablePackage -->
 		<PackageReference Include="fastmember" Version="1.5.0" />
-		<PackageReference Include="newtonsoft.json" Version="13.0.3" />
+		<PackageReference Include="newtonsoft.json" Version="13.0.4" />
 	</ItemGroup>
+
 </Project>

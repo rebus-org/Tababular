@@ -46,5 +46,8 @@
 ## 4.3.0
 * Add logo 🤩
 
+## 4.4.0
+* Update dependencies
+
 [antifree]: https://github.com/antifree
 [gary-palmer]: https://github.com/gary-palmer
